@@ -10,9 +10,9 @@
     
   </head>
   <body>
-    <input type='text' placholder="Username"></input>
-    <input type='checkbox' placholder="boom"></input>
-    <select>
+    <input id='textbox' type='text' placholder="Username"></input>
+    <input id='checkbox' type='checkbox' placholder="boom"></input>
+    <select id='select'>
       <option value='one'>One</option>
       <option>Two</option>
       <option value='three'>Three</option>
@@ -21,9 +21,9 @@
     <script src="../build/build.js"></script>
     <script>
     
-    var textbox = document.querySelector('input[type="text"]');
-    var checkbox = document.querySelector('input[type="checkbox"]');
-    var select = document.querySelector('select');
+    var textbox = document.getElementById('textbox');
+    var checkbox = document.getElementById('checkbox');
+    var select = document.getElementById('select');
     var val = require('val');
     
     val(textbox, 'nickjackson');
