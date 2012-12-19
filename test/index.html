@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+      body {
+        margin:50px;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <input type='text' placholder="Username"></input>
+    <input type='checkbox' placholder="boom"></input>
+    <select>
+      <option value='one'>One</option>
+      <option>Two</option>
+      <option value='three'>Three</option>
+      <option selected>Four</option>
+    </select>
+    <script src="../build/build.js"></script>
+    <script>
+    
+    var textbox = document.querySelector('input[type="text"]');
+    var checkbox = document.querySelector('input[type="checkbox"]');
+    var select = document.querySelector('select');
+    var val = require('val');
+    
+    val(textbox, 'nickjackson');
+    val(checkbox, 'true');
+    val(select, 'Two');
+    
+    console.log(val(textbox));
+    console.log(val(checkbox));
+    console.log(val(select));
+    
+    </script>
+  </body>
+</html>

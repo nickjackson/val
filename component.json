@@ -1,0 +1,13 @@
+{
+  "name": "val",
+  "repo": "nickjackson/val",
+  "description": "get/set element value",
+  "version": "0.0.1",
+  "keywords": ["val", "value"],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}
