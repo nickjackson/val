@@ -25,6 +25,8 @@ val(el, 'new value'); // sets el with 'new value'
   * Firefox 16 (Windows & Mac) 
   * Chrome 23 (Mac)
 
+## Todo
+* multiple support from select node
 
 ## License
 
