@@ -1,4 +1,3 @@
-
 # val
 
   get/set element value - inspired by jQuery .val()
@@ -17,8 +16,9 @@ val(el, 'new value'); // sets el with 'new value'
 ```
 
 ## Notes
-* supports checkboxes - set with true/false
-* supports selects
+* supports input elements including checkboxes
+* checkboxes can be set with true/false
+* also supports select/option
 * tested on:
   * IE8, IE9
   * Safari 6 (Windows)
