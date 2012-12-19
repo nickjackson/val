@@ -54,7 +54,7 @@ function checkbox(value) {
   }
 
   if (value == true || value == 'true') {
-    this.setAttribute('checked');
+    this.setAttribute('checked', 'true');
     return true;
   }
 
