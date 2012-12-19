@@ -1,3 +1,8 @@
+/**
+ * Module dependencies.
+ */
+
+var aSelect = require('select')
 
 /**
  * Gets `el` value or set `el` with `value`
@@ -84,17 +89,21 @@ function option(value) {
 
 function select(value) {
   if (!this.options) return null;
-  var options = Array.prototype.slice.call(this.options);
+  var options = [];
+  
+  options = aSelect(this.options, function(option){
+    return option.nodeType == 1;
+  });
 
   if (value == undefined) {
-    options.forEach(function(option){
+    aSelect(options, function(option){
       if (option.selected) return value = val(option);
     });
 
     return value;
   }
 
-  options.forEach(function(option){
+  aSelect(options, function(option){
     option.selected = (val(option) == value);
   });
 
