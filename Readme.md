@@ -19,7 +19,11 @@ val(el, 'new value'); // sets el with 'new value'
 ## Notes
 * supports checkboxes - set with true/false
 * supports selects
-* need to test with other browsers
+* tested on:
+  * IE8, IE9
+  * Safari 6 (Windows)
+  * Firefox 16 (Windows & Mac) 
+  * Chrome 23 (Mac)
 
 
 ## License
