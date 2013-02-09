@@ -19,7 +19,7 @@ module.exports = val = function(el, value) {
   var nodeName = el.nodeName.toLowerCase()
     , type = el.type;
 
-  if (nodeName == 'input') {
+  if (nodeName == 'input' || nodeName == 'textarea') {
     if (type == 'checkbox') {
       return checkbox.call(el, value);
     }
