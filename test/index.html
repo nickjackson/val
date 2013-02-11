@@ -18,22 +18,26 @@
       <option value='three'>Three</option>
       <option selected>Four</option>
     </select>
+    <textarea id="textarea"></textarea>
     <script src="../build/build.js"></script>
     <script>
     
     var textbox = document.getElementById('textbox');
     var checkbox = document.getElementById('checkbox');
     var select = document.getElementById('select');
+    var textarea = document.getElementById('textarea');
     var val = require('val');
     
     val(textbox, 'nickjackson');
     val(checkbox, 'true');
     val(select, 'Two');
-    
+    val(textarea, 'textarea');
+
     console.log(val(textbox));
     console.log(val(checkbox));
     console.log(val(select));
-    
+    console.log(val(textarea));
+
     </script>
   </body>
 </html>
