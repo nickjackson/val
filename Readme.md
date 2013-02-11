@@ -19,6 +19,7 @@ val(el, 'new value'); // sets el with 'new value'
 * supports input elements including checkboxes
 * checkboxes can be set with true/false
 * also supports select/option
+* now supports textarea [[Manuel Stofer](https://github.com/manuelstofer)]
 * tested on:
   * IE8, IE9
   * Safari 6 (Windows)
