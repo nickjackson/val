@@ -2,12 +2,12 @@
   "name": "val",
   "repo": "nickjackson/val",
   "description": "get/set element value",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "keywords": ["val", "value"],
-  "dependencies": {
-    "component/select": "*"
+  "dependencies": {},
+  "development": {
+    "component/assert": "*"
   },
-  "development": {},
   "license": "MIT",
   "scripts": [
     "index.js"

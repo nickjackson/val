@@ -1,6 +1,6 @@
 # val
 
-  get/set element value - inspired by jQuery .val()
+  get/set element value and more
 
 ## Installation
 
@@ -9,25 +9,43 @@
 ## Example
 ```js
 var val = require('val');
-var el = document.querySelector('input');
 
-val(el) // returns el value
-val(el, 'new value'); // sets el with 'new value'
+var el = document.querySelector('#textbox');
+
+val(el).value('foo bar baz')
+// set value to 'foo bar baz'
+
+val(el).value()
+//= 'foo bar baz'
 ```
 
-## Notes
-* supports input elements including checkboxes
-* checkboxes can be set with true/false
-* also supports select/option
-* now supports textarea [[Manuel Stofer](https://github.com/manuelstofer)]
-* tested on:
-  * IE8, IE9
-  * Safari 6 (Windows)
-  * Firefox 16 (Windows & Mac) 
-  * Chrome 23 (Mac)
+## API
+### input/text
+* `.value()` - get value 
+* `.value(str)` - set value 
+
+### input/checkbox
+* `.value()` - get value
+    * returns value or true if checked
+    * returns undefined if not checked.
+* `.value(str)` - sets value
+* `.checked()` - gets checked state
+* `.checked(boolean)` - sets checked state
+* `.checkedValue()` - gets value irrelevant of checked
+
+### textarea
+* `.value()` - get value 
+* `.value(str)` - set value 
+
+### select
+* `.value()` - get value of selection option
+* `.value(str)` - set selected option by `.value`
+* `.text()` - get innerText of selected option 
+* `.text(str)` - set selected option by `.innerText`
 
 ## Todo
 * multiple support from select node
+* Allow select-options to be added with object/array.
 
 ## License
 
