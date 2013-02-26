@@ -1,43 +1,17 @@
 <html>
   <head>
-    <title></title>
+    <title>Val Mocha Tests</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style>
-      body {
-        margin:50px;
-      }
-    </style>
-    
+    <link rel="stylesheet" href="mocha/mocha.css" />
   </head>
   <body>
-    <input id='textbox' type='text' placholder="Username"></input>
-    <input id='checkbox' type='checkbox' placholder="boom"></input>
-    <select id='select'>
-      <option value='one'>One</option>
-      <option>Two</option>
-      <option value='three'>Three</option>
-      <option selected>Four</option>
-    </select>
-    <textarea id="textarea"></textarea>
+    <div id="mocha"></div>
     <script src="../build/build.js"></script>
+    <script src="mocha/mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="tests.js"></script>
     <script>
-    
-    var textbox = document.getElementById('textbox');
-    var checkbox = document.getElementById('checkbox');
-    var select = document.getElementById('select');
-    var textarea = document.getElementById('textarea');
-    var val = require('val');
-    
-    val(textbox, 'nickjackson');
-    val(checkbox, 'true');
-    val(select, 'Two');
-    val(textarea, 'textarea');
-
-    console.log(val(textbox));
-    console.log(val(checkbox));
-    console.log(val(select));
-    console.log(val(textarea));
-
+      mocha.run()
     </script>
   </body>
 </html>
