@@ -20,7 +20,7 @@ val(el).value()
 ```
 
 ## API
-### input/text
+### input/text & input/password
 * `.value()` - get value 
 * `.value(str)` - set value 
 
