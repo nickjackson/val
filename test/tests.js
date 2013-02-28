@@ -127,10 +127,10 @@ describe('val', function(){
     describe('.value()', function(){
       it('can be set', function(){
         val(select).value('foo-bar-3');
-        assert(options[3].selected == true)
         assert(options[0].selected == false)
         assert(options[1].selected == false)
         assert(options[2].selected == false)
+        assert(options[3].selected == true)
       })
       it('can be got', function(){
         options[2].selected = true;
