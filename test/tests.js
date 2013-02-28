@@ -22,6 +22,27 @@ describe('val', function(){
     })
   })
 
+  describe('input#password', function(){
+    var textbox;
+
+    beforeEach(function(){
+      textbox = document.createElement('input');
+      textbox.setAttribute('type', 'password');
+      textbox.setAttribute('value', 'get foo bar');
+    })
+
+    it('can get value', function(){
+      var v = val(textbox).value();
+      assert(v == 'get foo bar');
+    })
+
+    it('can set value', function(){
+      val(textbox).value('set foo bar');
+      assert(textbox.getAttribute('value') == 'set foo bar');
+    })
+  })
+
+
   describe('textarea', function(){
     var textarea;
 
