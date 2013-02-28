@@ -56,6 +56,7 @@ function nodeType(el){
   if (node == 'textarea') return 'textarea';
   if (node == 'input') {
     if (type == 'text') return 'text';
+    if (type == 'password') return 'text';
     if (type == 'checkbox') return 'checkbox';
   }
   return;
