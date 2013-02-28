@@ -151,25 +151,5 @@ describe('val', function(){
         assert(val(select).text() == 'Foo Bar 0')
       })
     })
-
-
-    // it('can get checked state', function(){
-    //   checkbox.setAttribute('checked', 'checked');
-    //   assert(v.checked() == true);
-    //   checkbox.removeAttribute('checked');
-    //   assert(v.checked() == false);
-    // })
-    //
-    // it('can set a checked state', function(){
-    //   v.checked(true);
-    //   assert(checkbox.checked == true);
-    //   v.checked(false);
-    //   assert(checkbox.checked == false);
-    // })
-    //
   })
-
-
-
-
 })
