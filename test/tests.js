@@ -232,5 +232,66 @@ describe('val', function(){
         })
       })
     })
+    
+    describe('.options(fn)', function(){
+      it('loops through the options correctly', function(){
+        var i = 0;
+        val(select).options(function(option){
+          assert(options[i] == option);
+          i++;
+        });
+      })
+    })
+    
+    describe('.options()', function(){
+      beforeEach(function(){
+        select.innerHTML = '';
+        options = [];
+      })
+      
+      it('can set options with array of string', function(){
+        val(select).options(['Foo 1', 'Foo 2']);
+        var html = '<option>Foo 1</option><option>Foo 2</option>';
+        assert(select.innerHTML == html)
+      })
+      
+      it('can set options with array of object', function(){
+        var foo = {text: 'Foo', value: 'foo'};
+        var bar = {text: 'Bar', value: 'bar'};
+        val(select).options([foo, bar]);
+        var foohtml = '<option value="foo">Foo</option>';
+        var barhtml = '<option value="bar">Bar</option>';
+        assert(select.options[0].outerHTML == foohtml);
+        assert(select.options[1].outerHTML == barhtml);
+      });
+      
+      it('can set options and select with array of object', function(){
+        var foo = {text: 'Foo', value: 'foo'};
+        var bar = {text: 'Bar', value: 'bar'};
+        var baz = {text: 'Baz', value: 'baz', selected: true};
+        val(select).options([foo, bar, baz]);
+        assert(val(select).value() == 'baz');
+        assert(val(select).text() == 'Baz');
+      });
+      
+      it('can set options and multiple select with array of object', function(){
+        select.setAttribute('multiple', '')
+        var foo = {text: 'Foo', value: 'foo', selected: false};
+        var bar = {text: 'Bar', value: 'bar', selected: true};
+        var baz = {text: 'Baz', value: 'baz', selected: true};
+        val(select).options([foo, bar, baz]);
+        assert(val(select).value()[0] == 'bar');
+        assert(val(select).value()[1] == 'baz');
+        assert(val(select).text()[0] == 'Bar');
+        assert(val(select).text()[1] == 'Baz');
+      });
+      
+      it('can be chained when options are set', function(){
+        assert(val(select).options(['One', 'Two', 'Three']).text() == 'One');
+        var foo = {text: 'Foo', value: 'foo'};
+        var bar = {text: 'Bar', value: 'bar', selected: true};
+        assert(val(select).options([foo, bar]).value() == 'bar');
+      })
+    })
   })
 })

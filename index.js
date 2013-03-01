@@ -224,23 +224,37 @@ TextareaAPI.prototype.value = function(string){
 
 function SelectAPI(el){
   this.el = el;
-  this.options = [];
-  this.selected = [];
   this.multiple = el.multiple || false
+}
 
+
+/**
+ * Creates a map cb loop for all valid el options
+
+ * @return {Array} mapped results
+ * @api private
+ */
+
+
+SelectAPI.prototype.options = function(cb){
+  var el = this.el
+    , rtn = [];
+  
+  if (toString.call(cb) == '[object Array]') {
+    return this.setOptions(cb)
+  }
   // loop through select el option attributes and
   // find dom <option> and store in options array.
+
   for (var i=0; i < el.options.length; i++) {
     var opt = el.options[i];
     if (opt.nodeType == 1) {
-      if (opt.selected) {
-        this.selected.push(opt);
-      }
-      this.options.push(opt);
+      var fn = cb.call(this, opt, opt.selected);
+      if (fn) rtn.push(fn);
     }
   };
+  return rtn;
 }
-
 
 /**
  * Getter/Setter for the selected option:
@@ -255,22 +269,20 @@ SelectAPI.prototype.select = function(type, value) {
   var self = this;
 
   if (typeof value === 'undefined'){
-    var selected = this.selected;
-    var vals = selected.map(function(opt){
-      return opt[type];
+    var vals = this.options(function(option, sel){
+      if (sel) return option[type]
     });
 
     if (this.multiple) return vals;
-    if (this.selected.length == 0) return;
-
-    return vals[selected.length - 1];
+    if (vals.length == 0) return;
+    return vals[0];
   }
 
   if (typeof value === 'string') value = [value];
 
   if (!this.multiple) value = [value[0]];
-  
-  this.options.forEach(function(option){
+
+  this.options(function(option){
     option.selected = !!~value.indexOf(option[type]);
   })
 
@@ -305,4 +317,50 @@ SelectAPI.prototype.value = function(value){
 
 SelectAPI.prototype.text = function(value){
   return this.select.call(this, 'innerText', value);
+}
+
+
+/**
+ * Sets options for the select box
+ *
+ * @param {Array} opts
+ * @return {SelectAPI}
+ * @api private
+ */
+
+SelectAPI.prototype.setOptions = function(opts){
+  var self = this
+    , selected = [];
+
+  if (toString.call(opts) != '[object Array]') {
+    throw new Error('must specify Array')
+  }
+
+  this.el.innerHTML = '';
+
+  opts.forEach(function(opt){
+    var el = document.createElement('option');
+
+    if (typeof opt == 'string') {
+      opt = {text: opt}
+    }
+
+    if (opt.text) {
+      el.innerText = opt.text;
+    } else {
+      throw new Error('must specify text');
+    }
+
+    if (opt.value) {
+      el.value = opt.value;
+    }
+
+    if (opt.selected) {
+      selected.push(opt.text)
+    }
+
+    self.el.appendChild(el);
+  });
+
+  return this.text(selected);
 }

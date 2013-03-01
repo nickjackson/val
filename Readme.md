@@ -69,9 +69,22 @@ val(el).value()
 	val(el).text('Item 1')
 	val(el).text(['Item 3', 'Item 4'])
 
+**Set options**
+	
+	val(el).options(['Item 1', 'Item 2'])
+	
+	// you must specify a text tag.
+	var opt = {text: 'Item 1', value: 'item-1', selected: false}
+	val(el).options([opt])
+
+**Loop options**
+
+  val(el).options(function(option, selected){
+    console.log(option, 'is', selected)
+  })
 
 ## Todo
-* Allow select-options to be added with object/array.
+* Test on other browsers. Currently only tested on Chrome OSX.
 
 ## License
 
