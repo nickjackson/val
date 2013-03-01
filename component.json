@@ -2,7 +2,7 @@
   "name": "val",
   "repo": "nickjackson/val",
   "description": "get/set element value",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "keywords": ["val", "value"],
   "dependencies": {},
   "development": {
