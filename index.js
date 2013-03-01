@@ -1,4 +1,11 @@
 /**
+ * helper to find out type
+ */
+
+var toString = Object.prototype.toString;
+
+
+/**
  * Initalizes and returns the correct API
  * for the specified `el`.
  *
@@ -7,7 +14,7 @@
  * @api public
  */
 
-module.exports = function Val(el) {
+var Val = module.exports = function Val(el) {
   if (!el) throw Error('no el specified');
 
   var fn;
