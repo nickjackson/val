@@ -38,13 +38,39 @@ val(el).value()
 * `.value(str)` - set value 
 
 ### select
-* `.value()` - get value of selection option
-* `.value(str)` - set selected option by `.value`
-* `.text()` - get innerText of selected option 
-* `.text(str)` - set selected option by `.innerText`
+	
+**Get selected option** - Multiple Disabled
+	
+	val(el).value() 
+	//= 'item-1'
+	val(el).text()
+	//= 'Item 1'
+
+**Set selected option** - Multiple Disabled
+	
+	// if array is specified, only the first index is set to selected
+	
+	val(el).value('item-1')
+	val(el).value(['item-3', 'item-4'])
+	val(el).text('Item 1')
+	val(el).text(['Item 3', 'Item 4'])
+
+**Get selected option** - Multiple Enabled
+	
+	val(el).value() 
+	//= ['item-1', 'item-3']
+	val(el).text()
+	//= ['Item 1', 'Item 3']
+	
+**Set selected option** - Multiple Enabled
+	
+	val(el).value('item-1')
+	val(el).value(['item-3', 'item-4'])
+	val(el).text('Item 1')
+	val(el).text(['Item 3', 'Item 4'])
+
 
 ## Todo
-* multiple support from select node
 * Allow select-options to be added with object/array.
 
 ## License
