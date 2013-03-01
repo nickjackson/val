@@ -40,49 +40,57 @@ val(el).value()
 ### select
 	
 **Get selected option** - Multiple Disabled
-	
-	val(el).value() 
-	//= 'item-1'
-	val(el).text()
-	//= 'Item 1'
+```js
+val(el).value() 
+//= 'item-1'
+val(el).text()
+//= 'Item 1'
+```
 
 **Set selected option** - Multiple Disabled
+```js
+// if array is specified, only the first index is set to selected
 	
-	// if array is specified, only the first index is set to selected
-	
-	val(el).value('item-1')
-	val(el).value(['item-3', 'item-4'])
-	val(el).text('Item 1')
-	val(el).text(['Item 3', 'Item 4'])
+val(el).value('item-1')
+val(el).value(['item-3', 'item-4'])
+val(el).text('Item 1')
+val(el).text(['Item 3', 'Item 4'])
+```
 
 **Get selected option** - Multiple Enabled
-	
-	val(el).value() 
-	//= ['item-1', 'item-3']
-	val(el).text()
-	//= ['Item 1', 'Item 3']
-	
+
+```js
+val(el).value() 
+//= ['item-1', 'item-3']
+val(el).text()
+//= ['Item 1', 'Item 3']
+```	
 **Set selected option** - Multiple Enabled
-	
-	val(el).value('item-1')
-	val(el).value(['item-3', 'item-4'])
-	val(el).text('Item 1')
-	val(el).text(['Item 3', 'Item 4'])
+
+```js	
+val(el).value('item-1')
+val(el).value(['item-3', 'item-4'])
+val(el).text('Item 1')
+val(el).text(['Item 3', 'Item 4'])
+```
 
 **Set options**
+
+```js	
+val(el).options(['Item 1', 'Item 2'])
 	
-	val(el).options(['Item 1', 'Item 2'])
-	
-	// you must specify a text tag.
-	var opt = {text: 'Item 1', value: 'item-1', selected: false}
-	val(el).options([opt])
+// you must specify a text tag.
+var opt = {text: 'Item 1', value: 'item-1', selected: false}
+val(el).options([opt])
+```
 
 **Loop options**
 
-  val(el).options(function(option, selected){
-    console.log(option, 'is', selected)
-  })
-
+```js
+val(el).options(function(option, selected){
+  console.log(option, 'is', selected)
+})
+```
 ## Todo
 * Test on other browsers. Currently only tested on Chrome OSX.
 
