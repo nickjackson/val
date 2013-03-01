@@ -261,8 +261,8 @@ SelectAPI.prototype.select = function(type, value) {
 
   if (typeof value === 'string') value = [value];
 
-  if (!this.multiple) value = value[0];
-
+  if (!this.multiple) value = [value[0]];
+  
   this.options.forEach(function(option){
     option.selected = !!~value.indexOf(option[type]);
   })

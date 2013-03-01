@@ -124,6 +124,12 @@ describe('val', function(){
       };
     });
     
+    it('doesn\'t moan if there are no options in select', function(){
+      select.innerHTML = '';
+      assert(val(select).value() == undefined)
+      assert(val(select).text() == undefined)
+    });
+    
     describe('not multiple', function(){
       describe('.value()', function(){
         it('can be set', function(){
@@ -132,6 +138,27 @@ describe('val', function(){
           assert(options[1].selected == false)
           assert(options[2].selected == false)
           assert(options[3].selected == true)
+        })
+        it('can be set and handle array', function(){
+          val(select).value(['foo-bar-1']);
+          assert(options[0].selected == false)
+          assert(options[1].selected == true)
+          assert(options[2].selected == false)
+          assert(options[3].selected == false)
+        })
+        it('defaults to 0 with invalid value', function(){
+          val(select).value('foo');
+          assert(options[0].selected == true)
+          assert(options[1].selected == false)
+          assert(options[2].selected == false)
+          assert(options[3].selected == false)
+        })
+        it('defaults to 0 with invalid array value', function(){
+          val(select).value(['foo']);
+          assert(options[0].selected == true)
+          assert(options[1].selected == false)
+          assert(options[2].selected == false)
+          assert(options[3].selected == false)
         })
         it('can be got', function(){
           options[2].selected = true;
