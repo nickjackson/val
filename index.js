@@ -218,13 +218,17 @@ TextareaAPI.prototype.value = function(string){
 function SelectAPI(el){
   this.el = el;
   this.options = [];
+  this.selected = [];
+  this.multiple = el.multiple || false
 
   // loop through select el option attributes and
   // find dom <option> and store in options array.
   for (var i=0; i < el.options.length; i++) {
     var opt = el.options[i];
     if (opt.nodeType == 1) {
-      if (opt.selected) this.selected = opt;
+      if (opt.selected) {
+        this.selected.push(opt);
+      }
       this.options.push(opt);
     }
   };
@@ -235,18 +239,32 @@ function SelectAPI(el){
  * Getter/Setter for the selected option:
 
  * @params {string} selector `type`
- * @param {String} string
+ * @param {String|Array} value
  * @return {SelectAPI}
  * @api private
  */
 
-SelectAPI.prototype.select = function(type, string) {
-  if (typeof string === 'undefined'){
-    return this.selected[type];
+SelectAPI.prototype.select = function(type, value) {
+  var self = this;
+
+  if (typeof value === 'undefined'){
+    var selected = this.selected;
+    var vals = selected.map(function(opt){
+      return opt[type];
+    });
+
+    if (this.multiple) return vals;
+    if (this.selected.length == 0) return;
+
+    return vals[selected.length - 1];
   }
 
+  if (typeof value === 'string') value = [value];
+
+  if (!this.multiple) value = value[0];
+
   this.options.forEach(function(option){
-    option.selected = (option[type] == string);
+    option.selected = !!~value.indexOf(option[type]);
   })
 
   return this;
@@ -258,13 +276,13 @@ SelectAPI.prototype.select = function(type, string) {
  * - Set by providing `string`
  * - Get by providing no args
  *
- * @param {String} string
+ * @param {String|Array} value
  * @return {SelectAPI}
  * @api public
  */
 
-SelectAPI.prototype.value = function(string){
-  return this.select.call(this, 'value', string);
+SelectAPI.prototype.value = function(value){
+  return this.select.call(this, 'value', value);
 }
 
 
@@ -273,11 +291,11 @@ SelectAPI.prototype.value = function(string){
  * - Set by providing `string`
  * - Get by providing no args
  *
- * @param {String} string
+ * @param {String|Array} value
  * @return {SelectAPI}
  * @api public
  */
 
-SelectAPI.prototype.text = function(string){
-  return this.select.call(this, 'innerText', string);
+SelectAPI.prototype.text = function(value){
+  return this.select.call(this, 'innerText', value);
 }

@@ -123,32 +123,86 @@ describe('val', function(){
         options.push(option);
       };
     });
-
-    describe('.value()', function(){
-      it('can be set', function(){
-        val(select).value('foo-bar-3');
-        assert(options[0].selected == false)
-        assert(options[1].selected == false)
-        assert(options[2].selected == false)
-        assert(options[3].selected == true)
+    
+    describe('not multiple', function(){
+      describe('.value()', function(){
+        it('can be set', function(){
+          val(select).value('foo-bar-3');
+          assert(options[0].selected == false)
+          assert(options[1].selected == false)
+          assert(options[2].selected == false)
+          assert(options[3].selected == true)
+        })
+        it('can be got', function(){
+          options[2].selected = true;
+          assert(val(select).value() == 'foo-bar-2')
+        })
       })
-      it('can be got', function(){
-        options[2].selected = true;
-        assert(val(select).value() == 'foo-bar-2')
+
+      describe('.text()', function(){
+        it('can be set', function(){
+          val(select).text('Foo Bar 1');
+          assert(options[0].selected == false)
+          assert(options[1].selected == true)
+          assert(options[2].selected == false)
+          assert(options[3].selected == false)
+        })
+        it('can be got', function(){
+          options[0].selected = true;
+          assert(val(select).text() == 'Foo Bar 0')
+        })
       })
     })
-
-    describe('.text()', function(){
-      it('can be set', function(){
-        val(select).text('Foo Bar 1');
-        assert(options[0].selected == false)
-        assert(options[1].selected == true)
-        assert(options[2].selected == false)
-        assert(options[3].selected == false)
+    
+    describe('multiples', function(){
+      beforeEach(function(){
+        select.setAttribute('multiple', '');
       })
-      it('can be got', function(){
-        options[0].selected = true;
-        assert(val(select).text() == 'Foo Bar 0')
+
+      describe('.value', function(){
+        it('can be set with single item', function(){
+          val(select).value('foo-bar-3');
+          assert(options[0].selected == false)
+          assert(options[1].selected == false)
+          assert(options[2].selected == false)
+          assert(options[3].selected == true)
+        })
+        it('can be set with multiple items', function(){
+          val(select).value(['foo-bar-1', 'foo-bar-0']);
+          assert(options[0].selected == true)
+          assert(options[1].selected == true)
+          assert(options[2].selected == false)
+          assert(options[3].selected == false)
+        })
+        it('can be got', function(){
+          options[2].selected = true;
+          options[3].selected = true;
+          assert(val(select).value()[0] == 'foo-bar-2')
+          assert(val(select).value()[1] == 'foo-bar-3')
+        })
+      })
+      
+      describe('.text', function(){
+        it('can be set with single item', function(){
+          val(select).text('Foo Bar 3');
+          assert(options[0].selected == false)
+          assert(options[1].selected == false)
+          assert(options[2].selected == false)
+          assert(options[3].selected == true)
+        })
+        it('can be set with multiple items', function(){
+          val(select).text(['Foo Bar 1', 'Foo Bar 0']);
+          assert(options[0].selected == true)
+          assert(options[1].selected == true)
+          assert(options[2].selected == false)
+          assert(options[3].selected == false)
+        })
+        it('can be got', function(){
+          options[2].selected = true;
+          options[3].selected = true;
+          assert(val(select).text()[0] == 'Foo Bar 2')
+          assert(val(select).text()[1] == 'Foo Bar 3')
+        })
       })
     })
   })
