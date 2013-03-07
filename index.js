@@ -239,8 +239,8 @@ function SelectAPI(el){
 SelectAPI.prototype.options = function(cb){
   var el = this.el
     , rtn = [];
-  
-  if (toString.call(cb) == '[object Array]') {
+
+  if (toString.call(cb) != '[object Function]') {
     return this.setOptions(cb)
   }
   // loop through select el option attributes and
@@ -332,8 +332,16 @@ SelectAPI.prototype.setOptions = function(opts){
   var self = this
     , selected = [];
 
+  if (toString.call(opts) == '[object Object]') {
+    var arr = [];
+    for (var key in opts) {
+      arr.push({value: key, text: opts[key]})
+    }
+    opts = arr;
+  }
+
   if (toString.call(opts) != '[object Array]') {
-    throw new Error('must specify Array')
+    throw new Error('you have specified an incorrect options type')
   }
 
   this.el.innerHTML = '';

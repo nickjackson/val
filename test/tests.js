@@ -265,6 +265,14 @@ describe('val', function(){
         assert(select.options[1].outerHTML == barhtml);
       });
       
+      it('can set options with object', function(){
+        val(select).options({ foo: "Foo", bar: "Bar"});
+        var foohtml = '<option value="foo">Foo</option>';
+        var barhtml = '<option value="bar">Bar</option>';
+        assert(select.options[0].outerHTML == foohtml);
+        assert(select.options[1].outerHTML == barhtml);
+      });
+      
       it('can set options and select with array of object', function(){
         var foo = {text: 'Foo', value: 'foo'};
         var bar = {text: 'Bar', value: 'bar'};
