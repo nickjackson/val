@@ -273,6 +273,14 @@ describe('val', function(){
         assert(select.options[1].outerHTML == barhtml);
       });
       
+      it('can set options with object with blank text', function(){
+        val(select).options({ foo: "", bar: "Bar"});
+        var foohtml = '<option value="foo"></option>';
+        var barhtml = '<option value="bar">Bar</option>';
+        assert(select.options[0].outerHTML == foohtml);
+        assert(select.options[1].outerHTML == barhtml);
+      });
+      
       it('can set options and select with array of object', function(){
         var foo = {text: 'Foo', value: 'foo'};
         var bar = {text: 'Bar', value: 'bar'};

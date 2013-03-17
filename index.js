@@ -353,7 +353,7 @@ SelectAPI.prototype.setOptions = function(opts){
       opt = {text: opt}
     }
 
-    if (opt.text) {
+    if (opt.text != undefined) {
       el.innerText = opt.text;
     } else {
       throw new Error('must specify text');
