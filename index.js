@@ -21,10 +21,6 @@ var Val = module.exports = function Val(el) {
   var type = nodeType(el);
 
   switch (type) {
-    case 'text':
-      fn = new TextAPI(el);
-      break;
-
     case 'checkbox':
       fn = new CheckboxAPI(el);
       break;
@@ -38,7 +34,8 @@ var Val = module.exports = function Val(el) {
       break;
 
     default:
-      throw new Error(el.nodeName + ' not supported!');
+      fn = new InputAPI(el);
+      break;
   }
 
   fn.type = type;
@@ -62,8 +59,6 @@ function nodeType(el){
   if (node == 'select') return 'select';
   if (node == 'textarea') return 'textarea';
   if (node == 'input') {
-    if (type == 'text') return 'text';
-    if (type == 'password') return 'text';
     if (type == 'checkbox') return 'checkbox';
   }
   return;
@@ -71,14 +66,14 @@ function nodeType(el){
 
 
 /**
- * Initalizes a new `TextAPI` with `el`
+ * Initalizes a new `InputAPI` with `el`
  * `<input type="text">`
  *
  * @param {Element} el
  * @api private
  */
 
-function TextAPI(el){
+function InputAPI(el){
   this.el = el;
 }
 
@@ -89,11 +84,11 @@ function TextAPI(el){
  * - Get by providing no args
  *
  * @param {String} string
- * @return {TextAPI}
+ * @return {InputAPI}
  * @api public
  */
 
-TextAPI.prototype.value = function(string){
+InputAPI.prototype.value = function(string){
   if (typeof string === 'undefined'){
     return this.el.value;
   }
