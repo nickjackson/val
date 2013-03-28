@@ -42,6 +42,26 @@ describe('val', function(){
     })
   })
 
+  describe('input#hidden', function(){
+    var textbox;
+
+    beforeEach(function(){
+      textbox = document.createElement('input');
+      textbox.setAttribute('type', 'hidden');
+      textbox.setAttribute('value', 'get foo bar');
+    })
+
+    it('can get value', function(){
+      var v = val(textbox).value();
+      assert(v == 'get foo bar');
+    })
+
+    it('can set value', function(){
+      val(textbox).value('set foo bar');
+      assert(textbox.getAttribute('value') == 'set foo bar');
+    })
+  })
+
 
   describe('textarea', function(){
     var textarea;
@@ -123,13 +143,13 @@ describe('val', function(){
         options.push(option);
       };
     });
-    
+
     it('doesn\'t moan if there are no options in select', function(){
       select.innerHTML = '';
       assert(val(select).value() == undefined)
       assert(val(select).text() == undefined)
     });
-    
+
     describe('not multiple', function(){
       describe('.value()', function(){
         it('can be set', function(){
@@ -180,7 +200,7 @@ describe('val', function(){
         })
       })
     })
-    
+
     describe('multiples', function(){
       beforeEach(function(){
         select.setAttribute('multiple', '');
@@ -208,7 +228,7 @@ describe('val', function(){
           assert(val(select).value()[1] == 'foo-bar-3')
         })
       })
-      
+
       describe('.text', function(){
         it('can be set with single item', function(){
           val(select).text('Foo Bar 3');
@@ -232,7 +252,7 @@ describe('val', function(){
         })
       })
     })
-    
+
     describe('.options(fn)', function(){
       it('loops through the options correctly', function(){
         var i = 0;
@@ -242,19 +262,19 @@ describe('val', function(){
         });
       })
     })
-    
+
     describe('.options()', function(){
       beforeEach(function(){
         select.innerHTML = '';
         options = [];
       })
-      
+
       it('can set options with array of string', function(){
         val(select).options(['Foo 1', 'Foo 2']);
         var html = '<option>Foo 1</option><option>Foo 2</option>';
         assert(select.innerHTML == html)
       })
-      
+
       it('can set options with array of object', function(){
         var foo = {text: 'Foo', value: 'foo'};
         var bar = {text: 'Bar', value: 'bar'};
@@ -264,7 +284,7 @@ describe('val', function(){
         assert(select.options[0].outerHTML == foohtml);
         assert(select.options[1].outerHTML == barhtml);
       });
-      
+
       it('can set options with object', function(){
         val(select).options({ foo: "Foo", bar: "Bar"});
         var foohtml = '<option value="foo">Foo</option>';
@@ -272,7 +292,7 @@ describe('val', function(){
         assert(select.options[0].outerHTML == foohtml);
         assert(select.options[1].outerHTML == barhtml);
       });
-      
+
       it('can set options with object with blank text', function(){
         val(select).options({ foo: "", bar: "Bar"});
         var foohtml = '<option value="foo"></option>';
@@ -280,7 +300,7 @@ describe('val', function(){
         assert(select.options[0].outerHTML == foohtml);
         assert(select.options[1].outerHTML == barhtml);
       });
-      
+
       it('can set options and select with array of object', function(){
         var foo = {text: 'Foo', value: 'foo'};
         var bar = {text: 'Bar', value: 'bar'};
@@ -289,7 +309,7 @@ describe('val', function(){
         assert(val(select).value() == 'baz');
         assert(val(select).text() == 'Baz');
       });
-      
+
       it('can set options and multiple select with array of object', function(){
         select.setAttribute('multiple', '')
         var foo = {text: 'Foo', value: 'foo', selected: false};
@@ -301,7 +321,7 @@ describe('val', function(){
         assert(val(select).text()[0] == 'Bar');
         assert(val(select).text()[1] == 'Baz');
       });
-      
+
       it('can be chained when options are set', function(){
         assert(val(select).options(['One', 'Two', 'Three']).text() == 'One');
         var foo = {text: 'Foo', value: 'foo'};
